@@ -103,7 +103,7 @@ $app->delete('/admin/users/{$iduser}', function(Request $_request, Response $res
 
 	$user = new User();
 
-	$user->get((int)['{$iduser']);
+	$user->get((int)'$iduser');
 
 	$user->delete();
 
