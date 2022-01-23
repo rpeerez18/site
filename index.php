@@ -107,28 +107,31 @@ $app->delete('/admin/users/{$iduser}', function(Request $_request, Response $res
 
 	$user->delete();
 
-	header("Location: /admin/users");
-   return $response;
+   return $response->withHeader('Location', '/admin/users')->withStatus(200);
 	exit;
    
 
 });
 
-$app->get("/admin/users/[{:iduser}]", function($iduser) {
+$app->get("/admin/users/{iduser}", function(Request $_request, Response $response, $args) {
 
-	User::verifyLogin();
-
+   User::verifyLogin();
+   
    $user = new User();
+   
+   $iduser = $args['iduser'];
 
-   $user->get((int)$iduser);
+   $user->get((int) $iduser);
 
-	$page = new PageAdmin();
-
-	$page->setTpl("users-update", array(
-      "user"=>$user->getValues()
+   $page = new PageAdmin();
+   
+   $page->setTpl("users-update", array(
+     "user"=>$user->getValues()
    ));
 
-
+   return $response->withHeader('Location', '/admin/users')->withStatus(200);
+   exit;
+  
 });
 
 $app->post("/admin/users/create", function(Request $_request, Response $response, $args) {
@@ -143,18 +146,18 @@ $app->post("/admin/users/create", function(Request $_request, Response $response
 
    $user->save();
 
-   header("Location: /admin/users");
+   return $response->withHeader('Location', '/admin/users')->withStatus(200);
    exit;
-
-   return $response;
-
    
 });
 
-$app->post("/admin/users/:iduser", function($iduser) {
 
-	User::verifyLogin();
+$app->post("/admin/users/{iduser}", function(Request $_request, Response $response, $args) {
 
+   User::verifyLogin(); 
+
+   $iduser = $args['iduser'];
+	
    $user = new User();
 
    $_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
@@ -165,12 +168,14 @@ $app->post("/admin/users/:iduser", function($iduser) {
 
    $user->update();
 
-   header("Location: /admin/users");
+   return $response->withHeader('Location', '/admin/users')->withStatus(200);
 
 });
 
 $app->get("/admin/categories", function(Request $_request, Response $response, $args) {
 
+   User::verifyLogin();
+   
    $categories = Category::listAll();
 
 	$page = new PageAdmin();
@@ -185,7 +190,9 @@ $app->get("/admin/categories", function(Request $_request, Response $response, $
 
 $app->get("/admin/categories/create", function(Request $_request, Response $response, $args) {
 
-	$page = new PageAdmin();
+	User::verifyLogin();
+   
+   $page = new PageAdmin();
 
 	$page->setTpl("categories-create");
 
@@ -193,7 +200,7 @@ $app->get("/admin/categories/create", function(Request $_request, Response $resp
 
 });
 
-$app->post("/admin/categories/create", function() {
+$app->post("/admin/categories/create", function(Request $_request, Response $response, $args) {
 
 	$category = new Category();
 
@@ -201,8 +208,46 @@ $app->post("/admin/categories/create", function() {
 
    $category->save();
 
-   header('Location: /admin/categories');
+   return $response->withHeader('Location', '/admin/categories')->withStatus(200);
    exit;
+
+});
+
+$app->get("/admin/categories/{idcategory}", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $category = new Category();
+   
+   $idcategory = $args['idcategory'];
+
+   $category->get((int) $idcategory);
+
+   $page = new PageAdmin();
+   
+   $page->setTpl("categories-update", array(
+     "category"=>$category->getValues()
+   ));
+
+   return $response;
+  
+});
+
+$app->post("/admin/categories/{idcategory}", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $category = new Category();
+   
+   $idcategory = $args['idcategory'];
+	
+   $category->get((int)$idcategory);
+
+   $category->setData($_POST);
+
+   $category->save();
+
+   return $response->withHeader('Location', '/admin/users')->withStatus(200);
 
 });
 
