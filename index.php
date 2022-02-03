@@ -219,6 +219,21 @@ $app->post("/admin/categories/create", function(Request $_request, Response $res
 
 });
 
+$app->get('/admin/categories/{idcategory}/delete', function(Request $_request, Response $response, $args) {
+
+	$category = new Category();
+
+	$idcategory = $args['idcategory'];
+
+   $category->get((int) $idcategory);
+
+	$category->delete();
+
+   return $response->withHeader('Location', '/admin/categories')->withStatus(200);
+	exit;
+   
+});
+
 $app->get("/admin/categories/{idcategory}", function(Request $_request, Response $response, $args) {
 
    User::verifyLogin();
@@ -297,6 +312,21 @@ $app->post("/admin/news/create", function(Request $_request, Response $response,
 
    return $response->withHeader('Location', '/admin/news')->withStatus(200);
 
+});
+
+$app->get('/admin/news/{idnews}/delete', function(Request $_request, Response $response, $args) {
+
+	$news = new News();
+
+	$idnews = $args['idnews'];
+
+   $news->get((int) $idnews);
+
+	$news->delete();
+
+   return $response->withHeader('Location', '/admin/news')->withStatus(200);
+	exit;
+   
 });
 
 $app->run();

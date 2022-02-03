@@ -50,6 +50,17 @@ class News extends Model {
 
 	}
 
+	public function delete()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_news WHERE idnews = :idnews", [
+			':idnews'=>$this->getidnews()
+		]);
+
+	}
+
 }
 
  ?>
