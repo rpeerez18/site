@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -36,20 +36,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {loop="$news"}
+                  <?php $counter1=-1;  if( isset($news) && ( is_array($news) || $news instanceof Traversable ) && sizeof($news) ) foreach( $news as $key1 => $value1 ){ $counter1++; ?>
+
                   <tr>
-                    <td>{$value.idnews}</td>
-                    <td>{$value.title}</td>
-                    <td>{$value.subtitle}</td>
-                    <td>{$value.nameAuthor}</td>
-                    <td>{$value.surname}</td>    
-                    <td>{$value.textNews}</td>
+                    <td><?php echo htmlspecialchars( $value1["idnews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["subtitle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["nameAuthor"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["surname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>    
+                    <td><?php echo htmlspecialchars( $value1["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
                     
-                      <a href="/admin/news/{$value.idnews}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                      <a href="/admin/news/<?php echo htmlspecialchars( $value1["idnews"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>
-                  {/loop}
+                  <?php } ?>
+
                 </tbody>
               </table>
             </div>

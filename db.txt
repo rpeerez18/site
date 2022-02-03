@@ -52,6 +52,62 @@ CREATE TABLE tb_categories (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+CREATE TABLE tb_news (
+idnews int(11) NOT NULL auto_increment,
+nameAuthor char(30) NOT NULL ,
+surname char(30) NOT NULL ,
+dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+title varchar(100) NOT NULL ,
+subtitle varchar(200) ,
+textNews text NOT NULL ,
+desurl varchar (150),
+PRIMARY KEY (idnews)
+);
+
+
+DELIMITER ;;
+
+CREATE PROCEDURE sp_news_save(
+
+pidnews int(11),
+pnameAuthor char(30),
+psurname char(30),
+ptitle varchar(100),
+psubtitle varchar(200),
+ptextNews text,
+pdesurl varchar(150)
+
+)
+BEGIN
+	
+	IF pidnews > 0 THEN
+		
+		UPDATE tb_news
+        SET 
+			nameAuthor = pnameAuthor,
+            surname = psurname,
+            title = ptitle,
+            subtitle = psubtitle,
+            textNews = ptextNews,
+            desurl = pdesurl
+        WHERE idnews = pidnews;
+        
+
+    ELSE
+		
+		INSERT INTO tb_news (nameAuthor, surname, title, subtitle, textNews, desurl ) 
+        VALUES(pnameAuthor, psurname, ptitle, psubtitle, ptextNews, pdesurl );
+        
+        SET pidnews = LAST_INSERT_ID();
+        
+    END IF;
+    
+    SELECT * FROM tb_news WHERE idnews = pidnews;
+    
+END$$
+
+DELIMITER ;
+
 DELIMITER ;;
 CREATE PROCEDURE sp_userspasswordsrecoveries_create(
 piduser INT,

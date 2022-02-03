@@ -7,6 +7,7 @@ use \Slim\Factory\AppFactory;
 use \Reboot\Page;
 use \Reboot\PageAdmin;
 use \Reboot\Model\Category;
+use \Reboot\Model\News;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -20,7 +21,11 @@ $app->get('/', function(Request $_request, Response $response, $args) {
    
    $page = new Page();
 
-   $page->setTpl("index");
+   $news = News::listAll();
+
+   $page->setTpl("index",[
+      'news'=>$news
+  ]);
 
    return $response;
 
@@ -97,20 +102,21 @@ $app->get("/admin/users/create", function(Request $_request, Response $response,
 
 });
 
-$app->delete('/admin/users/{$iduser}', function(Request $_request, Response $response, $args) {
+$app->get('/admin/users/{iduser}/delete', function(Request $_request, Response $response, $args) {
 
 	User::verifyLogin();	
 
 	$user = new User();
 
-	$user->get((int)'$iduser');
+	$iduser = $args['iduser'];
+
+   $user->get((int) $iduser);
 
 	$user->delete();
 
    return $response->withHeader('Location', '/admin/users')->withStatus(200);
 	exit;
    
-
 });
 
 $app->get("/admin/users/{iduser}", function(Request $_request, Response $response, $args) {
@@ -248,6 +254,48 @@ $app->post("/admin/categories/{idcategory}", function(Request $_request, Respons
    $category->save();
 
    return $response->withHeader('Location', '/admin/users')->withStatus(200);
+
+});
+
+$app->get("/admin/news", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $news = News::listAll();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("news",[
+      'news'=>$news
+   ]);
+
+   return $response;
+
+});
+
+$app->get("/admin/news/create", function(Request $_request, Response $response, $args){
+
+	User::verifyLogin();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("news-create");
+   
+   return $response;
+   
+});
+
+$app->post("/admin/news/create", function(Request $_request, Response $response, $args){
+
+	User::verifyLogin();
+
+	$news = new News();
+
+	$news->setData($_POST);
+
+	$news->save();
+
+   return $response->withHeader('Location', '/admin/news')->withStatus(200);
 
 });
 
