@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -18,34 +18,34 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/news/{$news.idnews}" method="post" enctype="multipart/form-data">
+        <form role="form" action="/admin/news/<?php echo htmlspecialchars( $news["idnews"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group">
               <label for="title">Titulo da Notícia</label>
-              <input type="text" class="form-control" id="title" name="title" value="{$news.title}">
+              <input type="text" class="form-control" id="title" name="title" value="<?php echo htmlspecialchars( $news["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="subtitle">Subtítulo da Notícia</label>
-              <input type="text" class="form-control" id="subtitle" name="subtitle" value="{$news.subtitle}">
+              <input type="text" class="form-control" id="subtitle" name="subtitle" value="<?php echo htmlspecialchars( $news["subtitle"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="nameAutho">Nome Autor</label>
-              <input type="text" class="form-control" id="nameAuthor" name="nameAuthor" value="{$news.nameAuthor}">
+              <input type="text" class="form-control" id="nameAuthor" name="nameAuthor" value="<?php echo htmlspecialchars( $news["nameAuthor"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="surname">Sobrenome Autor</label>
-              <input type="text" class="form-control" id="surname" name="surname" value="{$news.surname}">
+              <input type="text" class="form-control" id="surname" name="surname" value="<?php echo htmlspecialchars( $news["surname"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="">Notícia</label>
-              <input type="text" class="form-control" id="textNews" name="textNews" value="{$news.textNews}">
+              <input type="text" class="form-control" id="textNews" name="textNews" value="<?php echo htmlspecialchars( $news["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="file">Foto</label>
-              <input type="file" class="form-control" id="file" name="file" value="{$news.textNews}">
+              <input type="file" class="form-control" id="file" name="file" value="<?php echo htmlspecialchars( $news["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
               <div class="box box-widget">
                 <div class="box-body">
-                  <img class="img-responsive" id="image-preview" src="{$news.desphoto}" alt="Photo">
+                  <img class="img-responsive" id="image-preview" src="<?php echo htmlspecialchars( $news["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="Photo">
                 </div>
               </div>
             </div>

@@ -23,14 +23,14 @@ class Category extends Model {
 		$sql = new Sql();
 
 		$results = $sql->select("CALL sp_categories_save(:idcategory, :descategory)", array(
-			":idcategory"=>$this->getdesidcategory(),
+			":idcategory"=>$this->getidcategory(),
 			":descategory"=>$this->getdescategory()
 		));
 
 		$this->setData($results[0]);
 
 		Category::updateFile();
-	
+
 	}
 
 	public function get($idcategory)
@@ -59,7 +59,6 @@ class Category extends Model {
 
 	}
 
-
 	public static function updateFile()
 	{
 
@@ -74,7 +73,7 @@ class Category extends Model {
 		file_put_contents($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR . "categories-menu.html", implode('', $html));
 
 	}
-
+		
 }
 
  ?>

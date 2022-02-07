@@ -7,6 +7,7 @@ use \Slim\Factory\AppFactory;
 use \Reboot\Page;
 use \Reboot\PageAdmin;
 use \Reboot\Model\Category;
+use \Reboot\Model\Videos;
 use \Reboot\Model\News;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,6 +27,16 @@ $app->get('/', function(Request $_request, Response $response, $args) {
    $page->setTpl("index",[
       'news'=>$news
   ]);
+
+   return $response;
+
+});
+
+$app->get('/projetos', function(Request $_request, Response $response, $args) {
+   
+   $page = new Page();
+
+   $page->setTpl("/projetos");
 
    return $response;
 
@@ -56,21 +67,21 @@ $app->get('/admin', function(Request $_request, Response $response, $args) {
  
  });
 
- $app->post('/admin/login', function() {
+ $app->post('/admin/login', function(Request $_request, Response $response, $args) {
    
     User::login($_POST["login"], $_POST["password"]);
 
-    header("Location: /admin");
-    exit;
- 
+   return $response->withHeader('Location', '/admin')->withStatus(200);
+   exit;
+   
  });
 
- $app->get('/admin/logout', function() {
+ $app->get('/admin/logout', function(Request $_request, Response $response, $args) {
 
 	User::logout();
 
-	header("Location: /admin/login");
-	exit;
+   return $response->withHeader('Location', '/admin/login')->withStatus(200);
+   exit;
 
 });
 
@@ -100,6 +111,23 @@ $app->get("/admin/users/create", function(Request $_request, Response $response,
 
 	return $response;
 
+});
+
+$app->post("/admin/users/create", function(Request $_request, Response $response, $args) {
+
+	User::verifyLogin();
+
+   $user = new User();
+
+   $_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
+
+   $user->setData($_POST);
+
+   $user->save();
+
+   return $response->withHeader('Location', '/admin/users')->withStatus(200);
+   exit;
+   
 });
 
 $app->get('/admin/users/{iduser}/delete', function(Request $_request, Response $response, $args) {
@@ -139,24 +167,6 @@ $app->get("/admin/users/{iduser}", function(Request $_request, Response $respons
    exit;
   
 });
-
-$app->post("/admin/users/create", function(Request $_request, Response $response, $args) {
-
-	User::verifyLogin();
-
-   $user = new User();
-
-   $_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
-
-   $user->setData($_POST);
-
-   $user->save();
-
-   return $response->withHeader('Location', '/admin/users')->withStatus(200);
-   exit;
-   
-});
-
 
 $app->post("/admin/users/{iduser}", function(Request $_request, Response $response, $args) {
 
@@ -268,7 +278,7 @@ $app->post("/admin/categories/{idcategory}", function(Request $_request, Respons
 
    $category->save();
 
-   return $response->withHeader('Location', '/admin/users')->withStatus(200);
+   return $response->withHeader('Location', '/admin/categories')->withStatus(200);
 
 });
 
@@ -327,6 +337,88 @@ $app->get('/admin/news/{idnews}/delete', function(Request $_request, Response $r
    return $response->withHeader('Location', '/admin/news')->withStatus(200);
 	exit;
    
+});
+
+$app->get("/admin/news/{idnews}", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $news = new News();
+   
+   $idnews = $args['idnews'];
+
+   $news->get((int) $idnews);
+
+   $page = new PageAdmin();
+   
+   $page->setTpl("news-update", array(
+     "news"=>$news->getValues()
+   ));
+
+   return $response;
+  
+});
+
+$app->post("/admin/news/{idnews}", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $news = new News();
+   
+   $idnews = $args['idnews'];
+	
+   $news->get((int)$idnews);
+
+   $news->setData($_POST);
+
+   $news->save();
+
+   $news->setPhoto($_FILES["file"]);
+
+   return $response->withHeader('Location', '/admin/news')->withStatus(200);
+
+});
+
+$app->get("/admin/videos", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $videos = Videos::listAll();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("videos",[
+      'videos'=>$videos
+   ]);
+
+   return $response;
+
+});
+
+$app->get("/admin/videos/create", function(Request $_request, Response $response, $args){
+
+	User::verifyLogin();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("videos-create");
+   
+   return $response;
+   
+});
+
+$app->post("/admin/videos/create", function(Request $_request, Response $response, $args){
+
+	User::verifyLogin();
+
+	$videos = new Videos();
+
+	$videos->setData($_POST);
+
+	$videos->save();
+
+   return $response->withHeader('Location', '/admin/videos')->withStatus(200);
+
 });
 
 $app->run();

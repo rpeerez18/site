@@ -1,0 +1,37 @@
+CREATE TABLE tb_video (
+  idvideo int(11) NOT NULL AUTO_INCREMENT,
+  title varchar(100) NOT NULL	
+  urlvideo varchar(128) DEFAULT NULL,
+  dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (idvideo)
+);
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_video_save`(
+pidvideo INT,
+ptitle VARCHAR(100),
+purlvideo varchar(128)
+)
+BEGIN
+	
+	IF pidvideo > 0 THEN
+		
+		UPDATE tb_video
+        SET 
+			title = ptitle,
+			urlvideo = purlvideo
+            
+        WHERE idvideo = pidvideo;
+        
+
+    ELSE
+		
+		INSERT INTO tb_video (title, urlvideo ) 
+        VALUES(ptitle, purlvideo );
+        
+        SET pidvideo = LAST_INSERT_ID();
+        
+    END IF;
+    
+    SELECT * FROM tb_video WHERE idvideo = pidvideo;
+    
+END

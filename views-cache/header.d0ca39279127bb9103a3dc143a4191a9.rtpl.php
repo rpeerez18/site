@@ -258,6 +258,7 @@ desired effect
         <!-- Optionally, you can add icons to the links -->
         <li><a href="/admin/users"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
         <li><a href="/admin/categories"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
+        <li><a href="/admin/videos"><i class="fa fa-link"></i> <span>Video</span></a></li>
         <li><a href="/admin/news"><i class="fa fa-link"></i> <span>Noticias</span></a></li>
        
 

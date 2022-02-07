@@ -1,1 +1,1 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><li><a href="/categories/1">Peças</a></li><li><a href="/categories/3">Robos Arduino</a></li><li><a href="/categories/2">Robos Lego</a></li>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><li><a href="/categories/11">Peças arduino</a></li><li><a href="/categories/10">Peças lego</a></li><li><a href="/categories/3">Robos Arduino</a></li><li><a href="/categories/2">Robos Lego</a></li>
