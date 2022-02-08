@@ -49,6 +49,21 @@ class News extends Model {
 		$this->setData($results[0]);
 
 	}
+	
+	public static function checkList($list)
+	{
+
+		foreach ($list as &$row) {
+			
+			$p = new News();
+			$p->setData($row);
+			$row = $p->getValues();
+
+		}
+
+		return $list;
+
+	}
 
 	public function delete()
 	{
@@ -91,7 +106,7 @@ class News extends Model {
 		$this->checkPhoto();
 
 		$values = parent::getValues();
-
+	
 		return $values;
 
 	}
@@ -101,7 +116,7 @@ class News extends Model {
 
 		$extension = explode('.', $file['name']);
 		$extension = end($extension);
-
+		
 		switch ($extension) {
 
 			case "jpg":
@@ -118,16 +133,16 @@ class News extends Model {
 			break;
 
 		}
-
+		
 		$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
 			"res" . DIRECTORY_SEPARATOR . 
 			"site" . DIRECTORY_SEPARATOR . 
 			"img" . DIRECTORY_SEPARATOR . 
 			"news" . DIRECTORY_SEPARATOR . 
 			$this->getidnews() . ".jpg";
-
+		
 		imagejpeg($image, $dist);
-
+	
 		imagedestroy($image);
 
 		$this->checkPhoto();

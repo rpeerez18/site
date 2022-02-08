@@ -29,7 +29,10 @@
                 <div class="card">
                   <div class="card-body">           
                     <p class="tituloCards"><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    <p class="card-text"><iframe width="560" height="315" src=<?php echo htmlspecialchars( $value1["urlvideo"], ENT_COMPAT, 'UTF-8', FALSE ); ?> title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                    <p class="card-text">
+                      <iframe width="560" height="315" src="<?php echo htmlspecialchars( $value1["urlvideo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     
+                    </p>
                     <!-- <p class="card-text"><small class="text-muted">https://www.ray-ban.com/brazil</small></p> -->
                   </div>
                 </div>

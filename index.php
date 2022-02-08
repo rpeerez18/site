@@ -25,7 +25,8 @@ $app->get('/', function(Request $_request, Response $response, $args) {
    $news = News::listAll();
 
    $page->setTpl("index",[
-      'news'=>$news
+      'news'=>News::checkList($news)
+      /*'products'=>Product::checkList($products)*/
   ]);
 
    return $response;
@@ -372,7 +373,7 @@ $app->post("/admin/news/{idnews}", function(Request $_request, Response $respons
    $news->setData($_POST);
 
    $news->save();
-
+ 
    $news->setPhoto($_FILES["file"]);
 
    return $response->withHeader('Location', '/admin/news')->withStatus(200);
