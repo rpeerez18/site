@@ -50,12 +50,11 @@ class Videos extends Model {
 
 		$sql = new Sql();
 
-		$sql->query("DELETE FROM tb_categories WHERE idcategory = :idcategory", [
-			':idcategory'=>$this->getidcategory()
+		$sql->query("DELETE FROM tb_video WHERE idvideo = :idvideo", [
+			':idvideo'=>$this->getidvideo()
 		]);
 
-		Category::updateFile();
-
+	
 	}
 
 

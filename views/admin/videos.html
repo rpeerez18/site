@@ -30,9 +30,8 @@
                     <p class="tituloCards">{$value.title}</p>
                     <p class="card-text">
                       <iframe width="560" height="315" src="{$value.urlvideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                     
                     </p>
-                    <!-- <p class="card-text"><small class="text-muted">https://www.ray-ban.com/brazil</small></p> -->
+                    <a href="/admin/videos/{$value.idvideo}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                   </div>
                 </div>
                 {/loop}

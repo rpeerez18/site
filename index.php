@@ -26,7 +26,7 @@ $app->get('/', function(Request $_request, Response $response, $args) {
 
    $page->setTpl("index",[
       'news'=>News::checkList($news)
-      /*'products'=>Product::checkList($products)*/
+
   ]);
 
    return $response;
@@ -37,7 +37,21 @@ $app->get('/projetos', function(Request $_request, Response $response, $args) {
    
    $page = new Page();
 
-   $page->setTpl("/projetos");
+	$page->setTpl("projetos");
+
+   return $response;
+
+});
+
+$app->get('/tutorial', function(Request $_request, Response $response, $args) {
+   
+   $page = new Page();
+
+   $videos = Videos::listAll();
+
+   $page->setTpl("tutorial", [
+      'videos'=>$videos
+   ]);
 
    return $response;
 
@@ -420,6 +434,21 @@ $app->post("/admin/videos/create", function(Request $_request, Response $respons
 
    return $response->withHeader('Location', '/admin/videos')->withStatus(200);
 
+});
+
+$app->get('/admin/videos/{idvideo}/delete', function(Request $_request, Response $response, $args) {
+
+	$videos = new Videos();
+
+	$idvideo = $args['idvideo'];
+
+   $videos->get((int) $idvideo);
+
+	$videos->delete();
+
+   return $response->withHeader('Location', '/admin/videos')->withStatus(200);
+	exit;
+   
 });
 
 $app->run();
