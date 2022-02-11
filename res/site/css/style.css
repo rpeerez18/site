@@ -256,8 +256,25 @@ footer p {
         }
         
     }
+
+    .tituloCards p{
+        text-align: justify;
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .titulos {
+        text-align: center;
+        border-style: dashed;
+        border-radius: 5px;
+        background-color: whitesmoke;
+    }
     
+     
     
+        
+        
+        
     
     
     

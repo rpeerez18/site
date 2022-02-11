@@ -6,7 +6,7 @@ use \Reboot\DB\Sql;
 use \Reboot\Model;
 use \Reboot\Mailer;
 
-class News extends Model {
+class Projects extends Model {
 
 	public static function listAll()
 	{
@@ -22,12 +22,9 @@ class News extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_news_save(:idnews, :nameAuthor, :surname, :title, :subtitle, :textNews, :desurl)", array(
-			":idnews"=>$this->getidnews(),
-			":nameAuthor"=>$this->getnameAuthor(),
-			":surname"=>$this->getsurname(),
+		$results = $sql->select("CALL sp_projects_save(:idnews, :nameAuthor, :surname, :title, :subtitle, :textNews, :desurl)", array(
+			":idprojects"=>$this->getidnews(),
 			":title"=>$this->gettitle(),
-			":subtitle"=>$this->getsubtitle(),
 			":textNews"=>$this->gettextNews(),
 			":desurl"=>$this->getdesurl()
 		));
