@@ -9,6 +9,7 @@ use \Reboot\PageAdmin;
 use \Reboot\Model\Category;
 use \Reboot\Model\Videos;
 use \Reboot\Model\News;
+use \Reboot\Model\Projects;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -24,8 +25,11 @@ $app->get('/', function(Request $_request, Response $response, $args) {
 
    $news = News::listAll();
 
+   $projects = Projects::listAll();
+
    $page->setTpl("index",[
-      'news'=>News::checkList($news)
+      'news'=>News::checkList($news),
+      'projects'=>Projects::checkList($projects)
 
   ]);
 
@@ -37,7 +41,26 @@ $app->get('/projetos', function(Request $_request, Response $response, $args) {
    
    $page = new Page();
 
-	$page->setTpl("projetos");
+   $projects = Projects::listAll();
+
+	$page->setTpl("projetos", [
+      'projects'=>Projects::checkList($projects)
+   ]);
+
+   return $response;
+
+});
+
+$app->get('/noticias', function(Request $_request, Response $response, $args) {
+   
+   $page = new Page();
+
+   $news = News::listAll();
+
+   $page->setTpl("noticias",[
+      'news'=>News::checkList($news)
+
+  ]);
 
    return $response;
 
@@ -450,6 +473,106 @@ $app->get('/admin/videos/{idvideo}/delete', function(Request $_request, Response
 	exit;
    
 });
+
+$app->get("/admin/projects", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $projects = Projects::listAll();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("projects",[
+      'projects'=>$projects
+   ]);
+
+   return $response;
+
+});
+
+$app->get("/admin/projects/create", function(Request $_request, Response $response, $args){
+
+	User::verifyLogin();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("projects-create");
+   
+   return $response;
+   
+});
+
+$app->post("/admin/projects/create", function(Request $_request, Response $response, $args){
+
+	User::verifyLogin();
+
+	$projects = new Projects();
+
+	$projects->setData($_POST);
+
+	$projects->save();
+
+   return $response->withHeader('Location', '/admin/projects')->withStatus(200);
+
+});
+
+$app->get('/admin/projects/{idprojects}/delete', function(Request $_request, Response $response, $args) {
+
+	$projects = new Projects();
+
+	$idprojects = $args['idprojects'];
+
+   $projects->get((int) $idprojects);
+
+	$projects->delete();
+
+   return $response->withHeader('Location', '/admin/projects')->withStatus(200);
+	exit;
+   
+});
+
+$app->get("/admin/projects/{idprojects}", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $projects = new Projects();
+   
+   $idprojects = $args['idprojects'];
+
+   $projects->get((int) $idprojects);
+
+   $page = new PageAdmin();
+   
+   $page->setTpl("projects-update", array(
+     "projects"=>$projects->getValues()
+   ));
+
+   return $response;
+  
+});
+
+$app->post("/admin/projects/{idprojects}", function(Request $_request, Response $response, $args) {
+
+   User::verifyLogin();
+   
+   $projects = new Projects();
+   
+   $idprojects = $args['idprojects'];
+	
+   $projects->get((int)$idprojects);
+
+   $projects->setData($_POST);
+
+   $projects->save();
+ 
+   $projects->setPhoto($_FILES["file"]);
+
+   return $response->withHeader('Location', '/admin/projects')->withStatus(200);
+
+});
+
+
+
 
 $app->run();
 

@@ -1,6 +1,6 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!--banner principal-->
 <section>
-  <img class="imgInicial" src="res/site/img/Legoroboti.png" width="10%" alt="imgInicial">
+  <img class="imgInicial" src="/res/site/img/Legoroboti.png" width="10%" alt="imgInicial">
 </section>
 <!--fim do banner principal-->
 <!--teste de alerta-->
@@ -19,9 +19,8 @@
     <div class="card-body">
 
       <h3>Tutoriais de Robô Lego</h3>
-      <p class="card-text">Lorem ipsum donec eu ornare integer orci sit ultrices etiam mauris, fringilla fermentum molestie eget tempor curabitur vitae aliquam in. nullam libero quisque et habitant proin nulla integer egestas tortor ultricies, dapibus molestie rhoncus lobortis et hendrerit consectetur rhoncus aliquet. adipiscing dictum nec phasellus scelerisque donec feugiat mi torquent, morbi iaculis lectus purus consectetur urna non. 
-      <button class="buttonPainel"><a class="nav-link" href="tutorial.html">Tutoriais</a></button></p> 
-         
+      <p class="card-text">
+      <button class="buttonPainel"><a class="nav-link" href="tutorial">Tutoriais</a></button></p> 
     </div>
   </div>
   <!--fim do card 1-->
@@ -33,9 +32,8 @@
       <h3>Notícias</h3>
      <?php $counter1=-1;  if( isset($news) && ( is_array($news) || $news instanceof Traversable ) && sizeof($news) ) foreach( $news as $key1 => $value1 ){ $counter1++; ?>
 
+      <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt=""  width="300px">
       <p class="card-text"><?php echo htmlspecialchars( $value1["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-      <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt=""  width="100px">
-    
       <?php } ?>
 
     </div>
@@ -46,10 +44,13 @@
     
     <h3>Projetos</h3>
     <div class="card-body">
-     
-      <p class="card-text">
-          ullamcorper dictum class, facilisis vivamus eros porttitor facilisis tellus. gravida tempus malesuada rhoncus sem semper egestas facilisis blandit morbi mi placerat at accumsan, consectetur metus faucibus tellus eros luctus porttitor nulla ornare ut proin. vel quisque bibendum lacinia, ultrices enim. <button class="buttonPainel"><a class="nav-link" href="projetos.html">Projetos</a></button> </p>
-     
+      <?php $counter1=-1;  if( isset($projects) && ( is_array($projects) || $projects instanceof Traversable ) && sizeof($projects) ) foreach( $projects as $key1 => $value1 ){ $counter1++; ?>
+
+      <p class="card-text"><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+
+      <button class="buttonPainel"><a class="nav-link" href="projetos">Projetos</a></button></p> 
+         <?php } ?>
+
     </div>
   </div>
 </div>

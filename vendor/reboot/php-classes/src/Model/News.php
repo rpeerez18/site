@@ -13,7 +13,7 @@ class News extends Model {
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_news ORDER BY idnews");
+		return $sql->select("SELECT * FROM tb_news ORDER BY idnews DESC");
 
 	}
 
@@ -22,14 +22,13 @@ class News extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_news_save(:idnews, :nameAuthor, :surname, :title, :subtitle, :textNews, :desurl)", array(
+		$results = $sql->select("CALL sp_news_save(:idnews, :nameAuthor, :surname, :title, :subtitle, :textNews)", array(
 			":idnews"=>$this->getidnews(),
 			":nameAuthor"=>$this->getnameAuthor(),
 			":surname"=>$this->getsurname(),
 			":title"=>$this->gettitle(),
 			":subtitle"=>$this->getsubtitle(),
-			":textNews"=>$this->gettextNews(),
-			":desurl"=>$this->getdesurl()
+			":textNews"=>$this->gettextNews()
 		));
 		
 		$this->setData($results[0]);

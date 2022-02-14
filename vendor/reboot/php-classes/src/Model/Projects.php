@@ -13,7 +13,7 @@ class Projects extends Model {
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_news ORDER BY idnews");
+		return $sql->select("SELECT * FROM tb_projects ORDER BY idprojects");
 
 	}
 
@@ -21,12 +21,12 @@ class Projects extends Model {
 	{
 
 		$sql = new Sql();
-
-		$results = $sql->select("CALL sp_projects_save(:idnews, :nameAuthor, :surname, :title, :subtitle, :textNews, :desurl)", array(
-			":idprojects"=>$this->getidnews(),
+		
+		$results = $sql->select("CALL sp_projects_save(:idprojects, :title, :description, :participants)", array(
+			":idprojects"=>$this->getidprojects(),
 			":title"=>$this->gettitle(),
-			":textNews"=>$this->gettextNews(),
-			":desurl"=>$this->getdesurl()
+			":description"=>$this->getdescription(),
+			":participants"=>$this->getparticipants()
 		));
 		
 		$this->setData($results[0]);
@@ -34,13 +34,13 @@ class Projects extends Model {
 	}
 
 	
-	public function get($idnews)
+	public function get($idprojects)
 	{
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_news WHERE idnews = :idnews", [
-			':idnews'=>$idnews
+		$results = $sql->select("SELECT * FROM tb_projects WHERE idprojects = :idprojects", [
+			':idprojects'=>$idprojects
 		]);
 
 		$this->setData($results[0]);
@@ -52,7 +52,7 @@ class Projects extends Model {
 
 		foreach ($list as &$row) {
 			
-			$p = new News();
+			$p = new Projects();
 			$p->setData($row);
 			$row = $p->getValues();
 
@@ -67,8 +67,8 @@ class Projects extends Model {
 
 		$sql = new Sql();
 
-		$sql->query("DELETE FROM tb_news WHERE idnews = :idnews", [
-			':idnews'=>$this->getidnews()
+		$sql->query("DELETE FROM tb_projects WHERE idprojects = :idprojects", [
+			':idprojects'=>$this->getidprojects()
 		]);
 
 	}
@@ -81,15 +81,15 @@ class Projects extends Model {
 			"res" . DIRECTORY_SEPARATOR . 
 			"site" . DIRECTORY_SEPARATOR . 
 			"img" . DIRECTORY_SEPARATOR . 
-			"news" . DIRECTORY_SEPARATOR . 
-			$this->getidnews() . ".jpg"
+			"projects" . DIRECTORY_SEPARATOR . 
+			$this->getidprojects() . ".jpg"
 			)) {
 
-			$url = "/res/site/img/news/" . $this->getidnews() . ".jpg";
+			$url = "/res/site/img/projects/" . $this->getidprojects() . ".jpg";
 
 		} else {
 
-			$url = "/res/site/img/news.jpg";
+			$url = "/res/site/img/projects.jpg";
 
 		}
 
@@ -135,8 +135,8 @@ class Projects extends Model {
 			"res" . DIRECTORY_SEPARATOR . 
 			"site" . DIRECTORY_SEPARATOR . 
 			"img" . DIRECTORY_SEPARATOR . 
-			"news" . DIRECTORY_SEPARATOR . 
-			$this->getidnews() . ".jpg";
+			"projects" . DIRECTORY_SEPARATOR . 
+			$this->getidprojects() . ".jpg";
 		
 		imagejpeg($image, $dist);
 	
@@ -145,7 +145,10 @@ class Projects extends Model {
 		$this->checkPhoto();
 
 	}
+	
 
 }
+
+
 
  ?>

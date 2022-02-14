@@ -18,11 +18,8 @@
             </div>
 
             <div class="col-3">
-                <h2><b>Desenvolvimento</b></h2>
-                <ul>
-                    <?php require $this->checkTemplate("categories-menu");?>
-
-                </ul>
+                <h2><b>Conteudo em Desenvolvimento</b></h2>
+                
               
             </div>
         </div>

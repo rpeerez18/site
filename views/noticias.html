@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe de robótica IFPR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/res/site/css/style.css">
+    <link rel="shortcut icon" href="imagens/icons8-glasses-100.png" type="image/x-icon">
+</head>
+
+<div class="alert alert-success" role="alert">
+    <div class="text-center">
+    <h4 class="alert-heading">Ultimas noticia de Robótica!</h4>
+</div>
+
+</div>
+<div class="card-group">
+    <div class="card">
+ 
+      <div class="card-body">
+        <div class="row"> 
+       {loop="$news"}
+       <div class=" col-md-4">
+        <h1>{$value.title}</h1>
+        <h3>{$value.subtitle}</h3>
+        <img src="{$value.desphoto}"width="400px">
+        <p class="card-text">{$value.textNews}</p>
+        <p class="tituloCards">Nome Autor {$value.nameAuthor} {$value.surname}</p>
+       
+      </div>
+        {/loop}
+     </div>
+    </div>
+  </div>
+</div>

@@ -3,67 +3,151 @@ USE db_siterobotica;
 
 
 CREATE TABLE tb_persons (
-  idperson int(11) NOT NULL AUTO_INCREMENT,
-  desperson varchar(64) NOT NULL,
-  desemail varchar(128) DEFAULT NULL,
-  nrphone bigint(20) DEFAULT NULL,
-  dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  	idperson int(11) NOT NULL AUTO_INCREMENT,
+  	desperson varchar(64) NOT NULL,
+  	desemail varchar(128) DEFAULT NULL,
+ 	 nrphone bigint(20) DEFAULT NULL,
+  	dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (idperson)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+);
 
 INSERT INTO tb_persons VALUES (1,'Rafael','rpeerez18@gmail.com',2147483647,'2021-12-01 03:00:00'),(7,'Suporte','suporte@gmail.com.br',1112345678,'2021-11-15 16:10:27');
 
 
 CREATE TABLE tb_users (
-  iduser int(11) NOT NULL AUTO_INCREMENT,
-  idperson int(11) NOT NULL,
-  deslogin varchar(64) NOT NULL,
-  despassword varchar(256) NOT NULL,
-  inadmin tinyint(4) NOT NULL DEFAULT '0',
+ 	 iduser int(11) NOT NULL AUTO_INCREMENT,
+ 	 idperson int(11) NOT NULL,
+ 	 deslogin varchar(64) NOT NULL,
+	  despassword varchar(256) NOT NULL,
+ 	 inadmin tinyint(4) NOT NULL DEFAULT '0',
   dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (iduser),
   KEY `FK_users_persons_idx` (idperson),
-  CONSTRAINT `fk_users_persons` FOREIGN KEY (idperson) REFERENCES tb_persons (idperson) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_users_persons` FOREIGN KEY (idperson) REFERENCES tb_persons (idperson)
+);
 
 INSERT INTO tb_users VALUES (1,1,'admin','$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga',1,'2021-12-01 03:00:00'),
 (7,7,'suporte','$2y$12$HFjgUm/mk1RzTy4ZkJaZBe0Mc/BA2hQyoUckvm.lFa6TesjtNpiMe',1,'2021-11-15 16:10:27');
 
 
 CREATE TABLE tb_userspasswordsrecoveries (
-  idrecovery int(11) NOT NULL AUTO_INCREMENT,
-  iduser int(11) NOT NULL,
-  desip varchar(45) NOT NULL,
-  dtrecovery datetime DEFAULT NULL,
-  dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (idrecovery),
-  KEY fk_userspasswordsrecoveries_users_idx (iduser),
-  CONSTRAINT fk_userspasswordsrecoveries_users FOREIGN KEY (iduser) REFERENCES tb_users (iduser) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+ 	 idrecovery int(11) NOT NULL AUTO_INCREMENT,
+  	iduser int(11) NOT NULL,
+  	desip varchar(45) NOT NULL,
+  	dtrecovery datetime DEFAULT NULL,
+  	dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (idrecovery),
+ KEY fk_userspasswordsrecoveries_users_idx (iduser),
+  CONSTRAINT fk_userspasswordsrecoveries_users FOREIGN KEY (iduser) REFERENCES tb_users (iduser)
+);
 
 INSERT INTO tb_userspasswordsrecoveries VALUES (1,7,'127.0.0.1',NULL,'2021-11-15 16:10:27'),(2,7,'127.0.0.1','2021-11-16 16:10:27','2021-11-15 16:10:27'),
 (3,7,'127.0.0.1','2017-03-15 13:37:35','2017-03-15 16:37:12');
 
 CREATE TABLE tb_categories (
-   idcategory int(11) NOT NULL AUTO_INCREMENT,
-   descategory varchar(64) NOT NULL,
-   dtregister timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (idcategory)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+   	idcategory int(11) NOT NULL AUTO_INCREMENT,
+   	descategory varchar(64) NOT NULL,
+   	dtregister timestamp NOT NULL DEFAULT current_timestamp(),
+ PRIMARY KEY (idcategory)
+);
 
 CREATE TABLE tb_news (
-idnews int(11) NOT NULL auto_increment,
-nameAuthor char(30) NOT NULL ,
-surname char(30) NOT NULL ,
-dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-title varchar(100) NOT NULL ,
-subtitle varchar(200) ,
-textNews text NOT NULL ,
-desurl varchar (150),
+	idnews int(11) NOT NULL auto_increment,
+	nameAuthor char(30) NOT NULL ,
+	surname char(30) NOT NULL ,
+	dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	title varchar(100) NOT NULL ,
+	subtitle varchar(200) ,
+	textNews text NOT NULL
 PRIMARY KEY (idnews)
 );
 
+CREATE TABLE tb_projects (
+	idprojects int(11) NOT NULL auto_increment,
+	title varchar (100) NOT NULL,
+	description text NOT NULL,
+	participants varchar (200) NOT NULL
+	
+PRIMARY KEY (idprojects)
+);
+
+CREATE TABLE tb_video (
+	idvideo int(11) NOT NULL AUTO_INCREMENT,
+  	title varchar(100) NOT NULL	
+  	urlvideo varchar(128) DEFAULT NULL,
+  	dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (idvideo)
+);
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_projects_save(
+pidprojects INT,
+ptitle VARCHAR(100),
+pdescription text,
+pparticipants varchar (200)
+)
+BEGIN
+	
+	IF pidprojects > 0 THEN
+		
+		UPDATE tb_projects
+        SET 
+			title = ptitle,
+			description= pdescription,
+			participants = pparticipants
+            
+        WHERE idprojects = pidprojects;
+        
+
+    ELSE
+		
+		INSERT INTO tb_projects (title, description, participants) 
+        VALUES(ptitle, pdescription, pparticipants);
+        
+        SET pidprojects = LAST_INSERT_ID();
+        
+    END IF;
+    
+    SELECT * FROM tb_projects WHERE idprojects = pidprojects;
+    
+END$$
+
+DELIMITER ;
+
+DELIMITER ;;
+
+CREATE PROCEDURE sp_video_save(
+pidvideo INT,
+ptitle VARCHAR(100),
+purlvideo varchar(128)
+)
+BEGIN
+	
+	IF pidvideo > 0 THEN
+		
+		UPDATE tb_video
+        SET 
+			title = ptitle,
+			urlvideo = purlvideo
+            
+        WHERE idvideo = pidvideo;
+        
+
+    ELSE
+		
+		INSERT INTO tb_video (title, urlvideo ) 
+        VALUES(ptitle, purlvideo );
+        
+        SET pidvideo = LAST_INSERT_ID();
+        
+    END IF;
+    
+    SELECT * FROM tb_video WHERE idvideo = pidvideo;
+    
+END
+
+DELIMITER ;
 
 DELIMITER ;;
 
@@ -74,8 +158,7 @@ pnameAuthor char(30),
 psurname char(30),
 ptitle varchar(100),
 psubtitle varchar(200),
-ptextNews text,
-pdesurl varchar(150)
+ptextNews text
 
 )
 BEGIN
@@ -88,15 +171,15 @@ BEGIN
             surname = psurname,
             title = ptitle,
             subtitle = psubtitle,
-            textNews = ptextNews,
-            desurl = pdesurl
+            textNews = ptextNews
+          
         WHERE idnews = pidnews;
         
 
     ELSE
 		
-		INSERT INTO tb_news (nameAuthor, surname, title, subtitle, textNews, desurl ) 
-        VALUES(pnameAuthor, psurname, ptitle, psubtitle, ptextNews, pdesurl );
+		INSERT INTO tb_news (nameAuthor, surname, title, subtitle, textNews ) 
+        VALUES(pnameAuthor, psurname, ptitle, psubtitle, ptextNews );
         
         SET pidnews = LAST_INSERT_ID();
         
@@ -104,7 +187,7 @@ BEGIN
     
     SELECT * FROM tb_news WHERE idnews = pidnews;
     
-END$$
+END
 
 DELIMITER ;
 

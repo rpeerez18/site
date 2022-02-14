@@ -1,33 +1,30 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe de robótica IFPR</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/res/site/css/style.css">
+  <link rel="shortcut icon" href="imagens/icons8-glasses-100.png" type="image/x-icon">
+</head>
 
-<div class="card-group" >
-    <div class="card">
-      <!-- <img src="imagens/card1.jpg" class="card-img-top" alt="..."> -->
-      <div class="card-body">
-        <div>
-            <img src="imagens/robolego.png" class="img-thumbnail" alt="">
-        </div>
-           
-        <h3 class="text-center">Projeto da equipe</h3>
-        <p class="card-text">Uns dos projetos desenvolvido utilizando robôs Lego.</p>
-        <!-- <p class="card-text"><small class="text-muted">https://lentes-hoya.com.br/</small></p> -->
-      </div>
-    </div>
-
-    <div class="card">
-        <!-- <img src="imagens/card1.jpg" class="card-img-top" alt="..."> -->
+    <div class="card-group">
+      <div class="card">
+   
         <div class="card-body">
-          <div>
-              <img src="imagens/legoInventor.png" class="img-thumbnail" alt="">
-          </div>
-             
-          <h3 class="text-center">Robô inventor</h3>
-          <p class="card-text">Lorem ipsum donec eu ornare integer orci sit ultrices etiam mauris, fringilla fermentum molestie eget tempor curabitur vitae aliquam in. nullam libero quisque et habitant proin nulla integer egestas.</p>
-          <!-- <p class="card-text"><small class="text-muted">https://lentes-hoya.com.br/</small></p> -->
+          <div class="row"> 
+         <?php $counter1=-1;  if( isset($projects) && ( is_array($projects) || $projects instanceof Traversable ) && sizeof($projects) ) foreach( $projects as $key1 => $value1 ){ $counter1++; ?>
+
+         <div class=" col-md-4">
+          <h1><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h1>
+          <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"width="400px">
+          <p text-align: justify class="card-text"><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+          <p class="tituloCards">Participantes <?php echo htmlspecialchars( $value1["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+         
         </div>
+          <?php } ?>
+
+       </div>
       </div>
-
     </div>
-    <h2 class="titulosobre">A equipe de robótica do campus</h2>
-
-    <p class="titulosobre">escrever sobre a equipe de robótica do IFPR campus Assis Chateaubriand.</p>
+  </div>
