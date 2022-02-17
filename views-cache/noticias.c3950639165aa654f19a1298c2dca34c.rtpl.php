@@ -25,7 +25,7 @@
         <h1><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h1>
         <h3><?php echo htmlspecialchars( $value1["subtitle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h3>
         <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"width="400px">
-        <p class="card-text"><?php echo htmlspecialchars( $value1["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+        <p class="textonoticias"><?php echo htmlspecialchars( $value1["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
         <p class="tituloCards">Nome Autor <?php echo htmlspecialchars( $value1["nameAuthor"], ENT_COMPAT, 'UTF-8', FALSE ); ?> <?php echo htmlspecialchars( $value1["surname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
        
       </div>

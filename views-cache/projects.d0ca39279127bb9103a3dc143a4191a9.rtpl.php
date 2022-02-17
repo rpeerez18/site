@@ -30,6 +30,8 @@
                     <th>Título do Projeto</th>        
                     <th>Participantes do Projeto</th>
                     <th>Descrição do Projeto</th>
+                    <th>Data de Inicio</th>
+                    <th>Date de Termino</th>
                     <th style="width: 140px">&nbsp;</th>
                   </tr>
                 </thead>
@@ -41,6 +43,8 @@
                     <td><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td>{date('d /m /y', strtotime($value.begin))}</td>
+                    <td><?php echo htmlspecialchars( $value1["end"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
                       <a href="/admin/projects/<?php echo htmlspecialchars( $value1["idprojects"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="/admin/projects/<?php echo htmlspecialchars( $value1["idprojects"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>

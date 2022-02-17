@@ -358,6 +358,12 @@ $app->post("/admin/news/create", function(Request $_request, Response $response,
 
 	$news->save();
 
+   if(isset($_FILES["file"]["name"]) && !empty($_FILES["file"]["name"])){
+
+      $news->setPhoto($_FILES["file"]);
+
+   }
+  
    return $response->withHeader('Location', '/admin/news')->withStatus(200);
 
 });
@@ -411,7 +417,11 @@ $app->post("/admin/news/{idnews}", function(Request $_request, Response $respons
 
    $news->save();
  
-   $news->setPhoto($_FILES["file"]);
+   if(isset($_FILES["file"]["name"]) && !empty($_FILES["file"]["name"])){
+
+      $news->setPhoto($_FILES["file"]);
+
+   } 
 
    return $response->withHeader('Location', '/admin/news')->withStatus(200);
 
@@ -512,6 +522,16 @@ $app->post("/admin/projects/create", function(Request $_request, Response $respo
 
 	$projects->save();
 
+   $projects->setPdf($_FILES['despdf']);
+
+
+   if(isset($_FILES["file"]["name"]) && !empty($_FILES["file"]["name"])){
+
+      $projects->setPhoto($_FILES["file"]);
+
+   }
+   
+
    return $response->withHeader('Location', '/admin/projects')->withStatus(200);
 
 });
@@ -544,7 +564,8 @@ $app->get("/admin/projects/{idprojects}", function(Request $_request, Response $
    $page = new PageAdmin();
    
    $page->setTpl("projects-update", array(
-     "projects"=>$projects->getValues()
+     "projects"=>$projects->getValues(),
+     "pdf"=>$projects->getPdfPath()
    ));
 
    return $response;
@@ -564,8 +585,14 @@ $app->post("/admin/projects/{idprojects}", function(Request $_request, Response 
    $projects->setData($_POST);
 
    $projects->save();
- 
-   $projects->setPhoto($_FILES["file"]);
+   
+   if(isset($_FILES["file"]["name"]) && !empty($_FILES["file"]["name"])){
+
+      $projects->setPhoto($_FILES["file"]);
+
+   } 
+
+   $projects->setPdf($_FILES['despdf']);
 
    return $response->withHeader('Location', '/admin/projects')->withStatus(200);
 

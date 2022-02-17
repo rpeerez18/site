@@ -33,6 +33,18 @@
               <input type="text" class="form-control" id="participants" name="participants" value="<?php echo htmlspecialchars( $projects["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
+              <label for="begin">Data de Inicio</label>
+              <input type="date" class="form-control" id="begin" name="begin" value="<?php echo htmlspecialchars( $projects["begin"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+            </div>
+            <div class="form-group">
+              <label for="end">Data de Termino</label>
+              <input type="date" class="form-control" id="end" name="end" value="<?php echo htmlspecialchars( $projects["end"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+            </div>
+            <div class="form-group">
+              <label for="despdf">PDF    <a href="<?php echo htmlspecialchars( $pdf, ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $pdf, ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+              <input type="file" class="form-control" id="despdf" name="despdf">
+            </div>
+            <div class="form-group">
               <label for="file">Foto</label>
               <input type="file" class="form-control" id="file" name="file" value="<?php echo htmlspecialchars( $projects["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
               <div class="box box-widget">

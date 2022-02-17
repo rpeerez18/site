@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="/admin/projects/create" method="post">
+            <form role="form" action="/admin/projects/create" enctype="multipart/form-data" method="post">
               <div class="box-body">
                 <div class="form-group">
                   <label for="title">Título do Projeto</label>
@@ -36,6 +36,22 @@
                 <div class="form-group">
                   <label for="participants">Participantes do Projeto</label>
                   <input type="text" class="form-control" id="participants" name="participants" placeholder="Digite os participantes do projeto">
+                </div>
+                <div class="form-group">
+                  <label for="begin">Data de Inicio</label>
+                  <input type="date" class="form-control" id="begin" name="begin">
+                </div>
+                <div class="form-group">
+                  <label for="end">Data de Termino</label>
+                  <input type="date" class="form-control" id="end" name="end">
+                </div>
+                <div class="form-group">
+                  <label for="despdf">PDF</label>
+                  <input type="file" class="form-control" id="despdf" name="despdf">
+                </div>
+                <div class="form-group">
+                  <label for="desphoto">Fotos</label>
+                  <input type="file" class="form-control" id="desphoto" name="desphoto">
                 </div>
               </div>
               <!-- /.box-body -->

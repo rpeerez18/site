@@ -23,7 +23,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/news/create" method="post">
+        <form role="form" action="/admin/news/create" enctype="multipart/form-data" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="title">Titulo da Noticia</label>
@@ -44,6 +44,10 @@
             <div class="form-group">
               <label for="textNews">Noticia</label>
               <input type="text" class="form-control" id="textNews" name="textNews" placeholder="Digite o corpo da noticia">
+            </div>
+            <div class="form-group">
+              <label for="textNews">Fotos</label>
+              <input type="file" class="form-control" id="desphoto" name="desphoto">
             </div>
           </div>
           <!-- /.box-body -->

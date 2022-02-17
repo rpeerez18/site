@@ -22,11 +22,14 @@ class Projects extends Model {
 
 		$sql = new Sql();
 		
-		$results = $sql->select("CALL sp_projects_save(:idprojects, :title, :description, :participants)", array(
+		$results = $sql->select("CALL sp_projects_save(:idprojects, :title, :description, :participants, :end, :begin)", array(
 			":idprojects"=>$this->getidprojects(),
 			":title"=>$this->gettitle(),
 			":description"=>$this->getdescription(),
-			":participants"=>$this->getparticipants()
+			":participants"=>$this->getparticipants(),
+			":end"=>$this->getend(),
+			":begin"=>$this->getbegin()
+			
 		));
 		
 		$this->setData($results[0]);
@@ -143,6 +146,80 @@ class Projects extends Model {
 		imagedestroy($image);
 
 		$this->checkPhoto();
+
+	}
+
+	public function setPdf($file)
+	{
+
+		$extension = explode('.', $file['name']);
+		$extension = end($extension);
+		if ($extension = 'pdf' ) {
+
+			$image = $file["tmp_name"];
+
+		}
+		else{
+
+			return;
+
+		}
+		
+		$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+			"res" . DIRECTORY_SEPARATOR . 
+			"site" . DIRECTORY_SEPARATOR . 
+			"pdf" . DIRECTORY_SEPARATOR . 
+			"projects" . DIRECTORY_SEPARATOR . 
+			$this->getidprojects() . ".pdf";
+		
+		move_uploaded_file($image, $dist);
+
+		$this->checkPdf();
+
+	}
+
+	public function checkPdf()
+	{
+
+		if (file_exists(
+			$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+			"res" . DIRECTORY_SEPARATOR . 
+			"site" . DIRECTORY_SEPARATOR . 
+			"pdf" . DIRECTORY_SEPARATOR . 
+			"projects" . DIRECTORY_SEPARATOR . 
+			$this->getidprojects() . ".pdf"
+			)) {
+
+			$url = "/res/site/pdf/projects/" . $this->getidprojects() . ".pdf";
+
+		} else {
+
+			$url = "";
+
+		}
+
+		return $this->setdespdf($url);
+
+	}
+
+	public function getPdfPath()
+	{
+		if (file_exists(
+			$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+			"res" . DIRECTORY_SEPARATOR . 
+			"site" . DIRECTORY_SEPARATOR . 
+			"pdf" . DIRECTORY_SEPARATOR . 
+			"projects" . DIRECTORY_SEPARATOR . 
+			$this->getidprojects() . ".pdf"
+			)) {
+
+			return "/res/site/pdf/projects/" . $this->getidprojects() . ".pdf";
+
+		} else {
+
+			return "";
+
+		}
 
 	}
 	
