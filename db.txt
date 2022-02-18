@@ -44,11 +44,14 @@ CREATE TABLE tb_userspasswordsrecoveries (
 INSERT INTO tb_userspasswordsrecoveries VALUES (1,7,'127.0.0.1',NULL,'2021-11-15 16:10:27'),(2,7,'127.0.0.1','2021-11-16 16:10:27','2021-11-15 16:10:27'),
 (3,7,'127.0.0.1','2017-03-15 13:37:35','2017-03-15 16:37:12');
 
-CREATE TABLE tb_categories (
-   	idcategory int(11) NOT NULL AUTO_INCREMENT,
-   	descategory varchar(64) NOT NULL,
-   	dtregister timestamp NOT NULL DEFAULT current_timestamp(),
- PRIMARY KEY (idcategory)
+CREATE TABLE tb_participants(
+idparticipants int(11) NOT NULL AUTO_INCREMENT,
+idprojects int(11),
+`name`varchar(100) NOT NULL,
+surname varchar(100) NOT NULL,
+PRIMARY KEY (idparticipants),
+KEY(idprojects),
+CONSTRAINT FOREIGN KEY (idprojects) REFERENCES tb_projects (idprojects)
 );
 
 CREATE TABLE tb_news (
@@ -58,7 +61,8 @@ CREATE TABLE tb_news (
 	dtregister timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	title varchar(100) NOT NULL ,
 	subtitle varchar(200) ,
-	textNews text NOT NULL
+	textNews text NOT NULL,
+	desphoto varchar (200)
 PRIMARY KEY (idnews)
 );
 
@@ -289,27 +293,40 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE PROCEDURE sp_categories_save(
-pidcategory INT,
-pdescategory VARCHAR(64)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_projects_save`(
+pidprojects INT(11),
+ptitle VARCHAR(100),
+pdescription text,
+pparticipants varchar (200),
+pend date,
+pbegin date
 )
 BEGIN
 	
-	IF pidcategory > 0 THEN
+	IF pidprojects > 0 THEN
 		
-		UPDATE tb_categories
-        SET descategory = pdescategory
-        WHERE idcategory = pidcategory;
+		UPDATE tb_projects
+        SET 
+			title = ptitle,
+			description= pdescription,
+			participants = pparticipants,
+            `end` = pend,
+            `begin` = pbegin
+			
+            
+        WHERE idprojects = pidprojects;
         
+
     ELSE
 		
-		INSERT INTO tb_categories (descategory) VALUES(pdescategory);
+		INSERT INTO tb_projects (title, description, participants, `end`, `begin`) 
+        VALUES(ptitle, pdescription, pparticipants, pend, pbegin);
         
-        SET pidcategory = LAST_INSERT_ID();
+        SET pidprojects = LAST_INSERT_ID();
         
     END IF;
     
-    SELECT * FROM tb_categories WHERE idcategory = pidcategory;
+    SELECT * FROM tb_projects WHERE idprojects = pidprojects;
     
-END ;;
+END;
 DELIMITER ;

@@ -105,6 +105,8 @@ class Projects extends Model {
 
 		$this->checkPhoto();
 
+		$this->checkPdf();
+
 		$values = parent::getValues();
 	
 		return $values;

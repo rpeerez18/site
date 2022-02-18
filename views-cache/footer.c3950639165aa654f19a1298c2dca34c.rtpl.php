@@ -1,26 +1,23 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!--Inicio do rodapé-->
+<link rel="stylesheet" href="/res/site/css/style.css">
 <footer>
 <div class="container-fluid">
-    <div class="col-100 footer">
-        <div class="content container-fluid">
-            <div class="col-3">
-                <h2><b>Um pouco sobre nós</b></h2>
-                <p>
-             Conteudo em desenvovimento!!
-                </p>
-            </div>
-            <div class="col-3 contatos">
-                <h2><b>contato</b></h2>
-               
-                <p class="local">Assis Chateaubriand, PR<p>
-                <p class="email">email@email.com<p>
-                <p class="telefone">(44)3528-1433<p>
-            </div>
-
-            <div class="col-3">
-                <h2><b>Conteudo em Desenvolvimento</b></h2>
+   <div class="container-fluid">
+        <div class="col-100 footer">
+            <div class="content container-fluid">
+                <div class="col-4">
+                    <h3 style="text-align: center;"><b>Um pouco sobre nós</b></h3>
+                    <p>
+                Conteudo em desenvovimento!!
+                    </p>
+                </div>
+                <div class="col-4 contatos">
+                    <h3 style="text-align: center;"><b>Contato</b></h3>
                 
-              
+                    <p class="local">Instituto Federal do Paraná Campus Assis Chateaubriand <p>
+                    <p class="email">Email: alexandre.monge@ifpr.edu.br<p>
+                    
+                </div>
             </div>
         </div>
     </div>

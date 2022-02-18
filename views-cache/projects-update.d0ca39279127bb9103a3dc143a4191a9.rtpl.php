@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
               <label for="description">Descrição do Projeto</label>
-              <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars( $projects["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <textarea class="form-control" id="description" name="description" rows="10" cols="190"><?php echo htmlspecialchars( $projects["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
             </div>
             <div class="form-group">
               <label for="participants">Participantes do Projeto</label>
@@ -41,7 +41,7 @@
               <input type="date" class="form-control" id="end" name="end" value="<?php echo htmlspecialchars( $projects["end"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
-              <label for="despdf">PDF    <a href="<?php echo htmlspecialchars( $pdf, ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $pdf, ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+              <label for="despdf">PDF<a href="<?php echo htmlspecialchars( $pdf, ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $pdf, ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
               <input type="file" class="form-control" id="despdf" name="despdf">
             </div>
             <div class="form-group">

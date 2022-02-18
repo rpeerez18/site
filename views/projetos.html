@@ -19,7 +19,9 @@
           <img src="{$value.desphoto}"width="400px">
           <p text-align: justify class="card-text">{$value.description}</p>
           <p class="tituloCards">Participantes {$value.participants}</p>
-         
+          <p>Inicio do Projeto {function="date('d /m /Y', strtotime($value.begin))"}</p>
+          <p>Fim do Projeto {function="date('d /m /Y', strtotime($value.end))"}</p>
+          <a class="btn btn-primary" href="{$value.despdf}" role="button">PDF</a>
         </div>
           {/loop}
        </div>

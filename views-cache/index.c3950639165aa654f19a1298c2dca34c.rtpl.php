@@ -1,9 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!--banner principal-->
-<section>
-  <img class="imgInicial" src="/res/site/img/Legoroboti.png" width="10%" alt="imgInicial">
-</section>
-<!--fim do banner principal-->
-<!--teste de alerta-->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!--teste de alerta-->
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Equipe de robótica IFPR do campus Assis Chateaubriand</h4>
   <p>Seja bem vindo ao nosso site! Nosso ambiente virtual foi implementado e modelado para equipe de robotica do IFPR campus Assis Chateaubriand para aplicação de conteúdos que eles desenvolvem e oferecer a comunidade a conhecer mais sobre a robótica do campus.</p>
@@ -20,7 +15,8 @@
 
       <h3>Tutoriais de Robô Lego</h3>
       <p class="card-text">
-      <button class="buttonPainel"><a class="nav-link" href="tutorial">Tutoriais</a></button></p> 
+      <img src="/res/site/img/tutorial.png" alt=""  width="300px"></p>
+      <a class="btn btn-primary" href="tutorial" role="button">Tutoriais</a>
     </div>
   </div>
   <!--fim do card 1-->
@@ -33,7 +29,7 @@
      <?php $counter1=-1;  if( isset($news) && ( is_array($news) || $news instanceof Traversable ) && sizeof($news) ) foreach( $news as $key1 => $value1 ){ $counter1++; ?>
 
       <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt=""  width="300px">
-      <p class="card-text"><?php echo htmlspecialchars( $value1["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+      <p class="noticias"><?php echo htmlspecialchars( $value1["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
       <?php } ?>
 
     </div>
@@ -46,11 +42,10 @@
     <div class="card-body">
       <?php $counter1=-1;  if( isset($projects) && ( is_array($projects) || $projects instanceof Traversable ) && sizeof($projects) ) foreach( $projects as $key1 => $value1 ){ $counter1++; ?>
 
-      <p class="card-text"><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
-
-      <button class="buttonPainel"><a class="nav-link" href="projetos">Projetos</a></button></p> 
+      <p class="card-text"><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p> 
          <?php } ?>
 
+         <a class="btn btn-primary" href="projetos" role="button">Projetos</a>
     </div>
   </div>
 </div>

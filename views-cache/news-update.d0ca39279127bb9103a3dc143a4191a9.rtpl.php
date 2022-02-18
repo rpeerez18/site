@@ -38,8 +38,8 @@
             </div>
             <div class="form-group">
               <label for="">Notícia</label>
-              <input type="text" class="form-control" id="textNews" name="textNews" value="<?php echo htmlspecialchars( $news["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
+            <textarea type="text" class="form-control" id="textNews" name="textNews" rows="10" cols="190"><?php echo htmlspecialchars( $news["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
             <div class="form-group">
               <label for="file">Foto</label>
               <input type="file" class="form-control" id="file" name="file" value="<?php echo htmlspecialchars( $news["textNews"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">

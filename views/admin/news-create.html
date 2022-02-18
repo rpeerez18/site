@@ -43,8 +43,8 @@
             </div>
             <div class="form-group">
               <label for="textNews">Noticia</label>
-              <input type="text" class="form-control" id="textNews" name="textNews" placeholder="Digite o corpo da noticia">
             </div>
+            <textarea class="form-control" id="textNews" name="textNews" rows="10" cols="190" placeholder="Digite o corpo da noticia"></textarea>
             <div class="form-group">
               <label for="textNews">Fotos</label>
               <input type="file" class="form-control" id="desphoto" name="desphoto">

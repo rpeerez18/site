@@ -3,12 +3,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Video
+    Lista de Participantes
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="/admin/categories">Categorias</a></li>
-    <li class="active"><a href="/admin/categories/create">Cadastrar</a></li>
+    <li><a href="/admin/participants">Participantes</a></li>
+    <li class="active"><a href="/admin/participants/create">Cadastrar</a></li>
   </ol>
 </section>
 
@@ -19,23 +19,17 @@
   	<div class="col-md-12">
   		<div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Novo Video</h3>
+          <h3 class="box-title">Novo participantes</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/videos/create" enctype="multipart/form-data" method="post">
+        <form role="form" action="/admin/participants/create" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="title">Nome do Video</label>
-              <input type="text" class="form-control" id="title" name="title" placeholder="Digite o nome do video">
-            </div>
-            <div class="form-group">
-              <label for="urlvideo">url</label>
-              <input type="text" class="form-control" id="urlvideo" name="urlvideo" placeholder="Digite a url do video">
-            </div>
-            <div class="form-group">
-              <label for="despdf">PDF</label>
-              <input type="file" class="form-control" id="despdf" name="despdf">
+              <label for="descategory">Nome do Participante</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome do participante">
+              <label for="descategory">Sobrenome do Participante</label>
+              <input type="text" class="form-control" id="surname" name="surname" placeholder="Digite o sobrenome do participante">
             </div>
           </div>
           <!-- /.box-body -->

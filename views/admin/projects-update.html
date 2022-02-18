@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
               <label for="description">Descrição do Projeto</label>
-              <input type="text" class="form-control" id="description" name="description" value="{$projects.description}">
+              <textarea class="form-control" id="description" name="description" rows="10" cols="190">{$projects.description}</textarea>
             </div>
             <div class="form-group">
               <label for="participants">Participantes do Projeto</label>
@@ -41,7 +41,7 @@
               <input type="date" class="form-control" id="end" name="end" value="{$projects.end}">
             </div>
             <div class="form-group">
-              <label for="despdf">PDF    <a href="{$pdf}">{$pdf}</label>
+              <label for="despdf">PDF<a href="{$pdf}">{$pdf}</label>
               <input type="file" class="form-control" id="despdf" name="despdf">
             </div>
             <div class="form-group">

@@ -23,6 +23,7 @@
        <div class=" col-md-4">
         <p class="card-text"><iframe width="430" height="430" src="<?php echo htmlspecialchars( $value1["urlvideo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </p>
         <p class="tituloCards"><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+        <a class="btn btn-primary" href="<?php echo htmlspecialchars( $value1["despdf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" role="button">PDF</a>
       </div>
         <?php } ?>
 

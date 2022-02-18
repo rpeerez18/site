@@ -1,8 +1,3 @@
-<!--banner principal-->
-<section>
-  <img class="imgInicial" src="/res/site/img/Legoroboti.png" width="10%" alt="imgInicial">
-</section>
-<!--fim do banner principal-->
 <!--teste de alerta-->
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Equipe de robótica IFPR do campus Assis Chateaubriand</h4>
@@ -20,7 +15,8 @@
 
       <h3>Tutoriais de Robô Lego</h3>
       <p class="card-text">
-      <button class="buttonPainel"><a class="nav-link" href="tutorial">Tutoriais</a></button></p> 
+      <img src="/res/site/img/tutorial.png" alt=""  width="300px"></p>
+      <a class="btn btn-primary" href="tutorial" role="button">Tutoriais</a>
     </div>
   </div>
   <!--fim do card 1-->
@@ -32,7 +28,7 @@
       <h3>Notícias</h3>
      {loop="$news"}
       <img src="{$value.desphoto}" alt=""  width="300px">
-      <p class="card-text">{$value.textNews}</p>
+      <p class="noticias">{$value.textNews}</p>
       {/loop}
     </div>
   </div>
@@ -43,9 +39,9 @@
     <h3>Projetos</h3>
     <div class="card-body">
       {loop="$projects"}
-      <p class="card-text">{$value.description}
-      <button class="buttonPainel"><a class="nav-link" href="projetos">Projetos</a></button></p> 
+      <p class="card-text">{$value.description}</p> 
          {/loop}
+         <a class="btn btn-primary" href="projetos" role="button">Projetos</a>
     </div>
   </div>
 </div>

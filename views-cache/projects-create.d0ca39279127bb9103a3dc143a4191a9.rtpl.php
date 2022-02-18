@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                   <label for="description">Descrição do Projeto</label>
-                  <input type="text" class="form-control" id="description" name="description" placeholder="Digite a descrição do Projeto">
+                  <textarea class="form-control" id="description" name="description" rows="10" cols="190" placeholder="Digite a descrição do Projeto"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="participants">Participantes do Projeto</label>

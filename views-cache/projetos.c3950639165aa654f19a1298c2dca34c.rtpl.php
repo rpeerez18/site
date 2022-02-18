@@ -20,7 +20,9 @@
           <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"width="400px">
           <p text-align: justify class="card-text"><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <p class="tituloCards">Participantes <?php echo htmlspecialchars( $value1["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-         
+          <p>Inicio do Projeto <?php echo date('d /m /Y', strtotime($value1["begin"])); ?></p>
+          <p>Fim do Projeto <?php echo date('d /m /Y', strtotime($value1["end"])); ?></p>
+          <a class="btn btn-primary" href="<?php echo htmlspecialchars( $value1["despdf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" role="button">PDF</a>
         </div>
           <?php } ?>
 

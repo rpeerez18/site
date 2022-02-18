@@ -29,9 +29,9 @@
                     <th style="width: 10px">#</th>
                     <th>Título do Projeto</th>        
                     <th>Participantes do Projeto</th>
-                    <th>Descrição do Projeto</th>
                     <th>Data de Inicio</th>
                     <th>Date de Termino</th>
+                    <th>Descrição do Projeto</th>
                     <th style="width: 140px">&nbsp;</th>
                   </tr>
                 </thead>
@@ -41,9 +41,9 @@
                     <td>{$value.idprojects}</td>
                     <td>{$value.title}</td>
                     <td>{$value.participants}</td>
+                    <td>{function="date('d /m /Y', strtotime($value.begin))"}</td>
+                    <td>{function="date('d /m /Y', strtotime($value.end))"}</td>
                     <td>{$value.description}</td>
-                    <td>{date('d /m /y', strtotime($value.begin))}</td>
-                    <td>{$value.end}</td>
                     <td>
                       <a href="/admin/projects/{$value.idprojects}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="/admin/projects/{$value.idprojects}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>

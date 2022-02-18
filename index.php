@@ -6,7 +6,7 @@ use Reboot\Model\User;
 use \Slim\Factory\AppFactory;
 use \Reboot\Page;
 use \Reboot\PageAdmin;
-use \Reboot\Model\Category;
+use \Reboot\Model\Participants;
 use \Reboot\Model\Videos;
 use \Reboot\Model\News;
 use \Reboot\Model\Projects;
@@ -42,9 +42,10 @@ $app->get('/projetos', function(Request $_request, Response $response, $args) {
    $page = new Page();
 
    $projects = Projects::listAll();
-
-	$page->setTpl("projetos", [
+   
+	$page->setTpl("projetos",[
       'projects'=>Projects::checkList($projects)
+   
    ]);
 
    return $response;
@@ -73,7 +74,7 @@ $app->get('/tutorial', function(Request $_request, Response $response, $args) {
    $videos = Videos::listAll();
 
    $page->setTpl("tutorial", [
-      'videos'=>$videos
+      'videos'=>Videos::checkList($videos)
    ]);
 
    return $response;
@@ -226,97 +227,97 @@ $app->post("/admin/users/{iduser}", function(Request $_request, Response $respon
 
 });
 
-$app->get("/admin/categories", function(Request $_request, Response $response, $args) {
+$app->get("/admin/participants", function(Request $_request, Response $response, $args) {
 
    User::verifyLogin();
    
-   $categories = Category::listAll();
+   $participants = Participants::listAll();
 
 	$page = new PageAdmin();
 
-	$page->setTpl("categories",[
-      'categories'=>$categories
+	$page->setTpl("participants",[
+      'participants'=>$participants
    ]);
 
    return $response;
 
 });
 
-$app->get("/admin/categories/create", function(Request $_request, Response $response, $args) {
+$app->get("/admin/participants/create", function(Request $_request, Response $response, $args) {
 
 	User::verifyLogin();
    
    $page = new PageAdmin();
 
-	$page->setTpl("categories-create");
+	$page->setTpl("participants-create");
 
    return $response;
 
 });
 
-$app->post("/admin/categories/create", function(Request $_request, Response $response, $args) {
+$app->post("/admin/participants/create", function(Request $_request, Response $response, $args) {
 
-	$category = new Category();
+	$participants = new Participants();
 
-   $category->setData($_POST);
+   $participants->setData($_POST);
 
-   $category->save();
+   $participants->save();
 
-   return $response->withHeader('Location', '/admin/categories')->withStatus(200);
+   return $response->withHeader('Location', '/admin/participants')->withStatus(200);
    exit;
 
 });
 
-$app->get('/admin/categories/{idcategory}/delete', function(Request $_request, Response $response, $args) {
+$app->get('/admin/participants/{idparticipants}/delete', function(Request $_request, Response $response, $args) {
 
-	$category = new Category();
+	$participants = new Participants();
 
-	$idcategory = $args['idcategory'];
+	$idparticipants = $args['idparticipants'];
 
-   $category->get((int) $idcategory);
+   $participants->get((int) $idparticipants);
 
-	$category->delete();
+	$participants->delete();
 
-   return $response->withHeader('Location', '/admin/categories')->withStatus(200);
+   return $response->withHeader('Location', '/admin/participants')->withStatus(200);
 	exit;
    
 });
 
-$app->get("/admin/categories/{idcategory}", function(Request $_request, Response $response, $args) {
+$app->get("/admin/participants/{idparticipants}", function(Request $_request, Response $response, $args) {
 
    User::verifyLogin();
    
-   $category = new Category();
+   $participants = new Participants();
    
-   $idcategory = $args['idcategory'];
+   $idparticipants = $args['idparticipants'];
 
-   $category->get((int) $idcategory);
+   $participants->get((int) $idparticipants);
 
    $page = new PageAdmin();
    
-   $page->setTpl("categories-update", array(
-     "category"=>$category->getValues()
+   $page->setTpl("participants-update", array(
+     "participants"=>$participants->getValues()
    ));
 
    return $response;
   
 });
 
-$app->post("/admin/categories/{idcategory}", function(Request $_request, Response $response, $args) {
+$app->post("/admin/participants/{idparticipants}", function(Request $_request, Response $response, $args) {
 
    User::verifyLogin();
    
-   $category = new Category();
+   $participants = new Participants();
    
-   $idcategory = $args['idcategory'];
+   $idparticipants = $args['idparticipants'];
 	
-   $category->get((int)$idcategory);
+   $participants->get((int)$idparticipants);
 
-   $category->setData($_POST);
+   $participants->setData($_POST);
 
-   $category->save();
+   $participants->save();
 
-   return $response->withHeader('Location', '/admin/categories')->withStatus(200);
+   return $response->withHeader('Location', '/admin/participants')->withStatus(200);
 
 });
 
@@ -436,7 +437,8 @@ $app->get("/admin/videos", function(Request $_request, Response $response, $args
 	$page = new PageAdmin();
 
 	$page->setTpl("videos",[
-      'videos'=>$videos
+      'videos'=>$videos,
+      
    ]);
 
    return $response;
@@ -464,6 +466,8 @@ $app->post("/admin/videos/create", function(Request $_request, Response $respons
 	$videos->setData($_POST);
 
 	$videos->save();
+
+   $videos->setPdf($_FILES['despdf']);
 
    return $response->withHeader('Location', '/admin/videos')->withStatus(200);
 
