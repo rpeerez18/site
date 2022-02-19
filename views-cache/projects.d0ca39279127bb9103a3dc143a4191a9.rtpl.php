@@ -28,7 +28,6 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Título do Projeto</th>        
-                    <th>Participantes do Projeto</th>
                     <th>Data de Inicio</th>
                     <th>Date de Termino</th>
                     <th>Descrição do Projeto</th>
@@ -41,7 +40,6 @@
                   <tr>
                     <td><?php echo htmlspecialchars( $value1["idprojects"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo date('d /m /Y', strtotime($value1["begin"])); ?></td>
                     <td><?php echo date('d /m /Y', strtotime($value1["end"])); ?></td>
                     <td><?php echo htmlspecialchars( $value1["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>

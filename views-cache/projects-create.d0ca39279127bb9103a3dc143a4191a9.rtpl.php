@@ -34,10 +34,6 @@
                   <textarea class="form-control" id="description" name="description" rows="10" cols="190" placeholder="Digite a descrição do Projeto"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="participants">Participantes do Projeto</label>
-                  <input type="text" class="form-control" id="participants" name="participants" placeholder="Digite os participantes do projeto">
-                </div>
-                <div class="form-group">
                   <label for="begin">Data de Inicio</label>
                   <input type="date" class="form-control" id="begin" name="begin">
                 </div>

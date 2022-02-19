@@ -29,6 +29,8 @@
                     <th style="width: 10px">#</th>
                     <th>Nome do Participante</th>
                     <th>Sobrenome</th>
+                    <th>ID Projeto</th>
+                    <th>Titulo Projeto</th>
 
                     <th style="width: 140px">&nbsp;</th>
                   </tr>
@@ -40,8 +42,10 @@
                     <td><?php echo htmlspecialchars( $value1["idparticipants"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["name"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["surname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["idprojects"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+
                     <td>
-                      <a href="/admin/participants/<?php echo htmlspecialchars( $value1["idparticipants"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="/admin/participants/<?php echo htmlspecialchars( $value1["idparticipants"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>

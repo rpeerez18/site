@@ -13,7 +13,7 @@ class Participants extends Model {
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_participants ORDER BY idparticipants");
+		return $sql->select("SELECT * FROM tb_participants INNER JOIN tb_projects ON tb_participants.idprojects = tb_projects.idprojects ORDER BY idparticipants");
 
 	}
 
@@ -22,10 +22,12 @@ class Participants extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_participants_save(:idparticipants, :name, :surname)", array(
+		$results = $sql->select("CALL sp_participants_save(:idparticipants, :idprojects, :name, :surname)", array(
 			":idparticipants"=>$this->getidparticipants(),
+			":idprojects"=>$this->getidprojects(),
 			":name"=>$this->getname(),
 			":surname"=>$this->getsurname()
+			
 		));
 
 		$this->setData($results[0]);

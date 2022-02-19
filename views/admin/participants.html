@@ -29,6 +29,8 @@
                     <th style="width: 10px">#</th>
                     <th>Nome do Participante</th>
                     <th>Sobrenome</th>
+                    <th>ID Projeto</th>
+                    <th>Titulo Projeto</th>
 
                     <th style="width: 140px">&nbsp;</th>
                   </tr>
@@ -39,8 +41,10 @@
                     <td>{$value.idparticipants}</td>
                     <td>{$value.name}</td>
                     <td>{$value.surname}</td>
+                    <td>{$value.idprojects}</td>
+                    <td>{$value.title}</td>
+
                     <td>
-                      <a href="/admin/participants/{$value.idparticipants}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="/admin/participants/{$value.idparticipants}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>

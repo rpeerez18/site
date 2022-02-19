@@ -32,7 +32,7 @@
                     <p class="card-text">
                       <iframe width="560" height="315" src="<?php echo htmlspecialchars( $value1["urlvideo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </p>
-                    <a class="btn btn-primary" href="/res/site/pdf/videos/if=<?php echo htmlspecialchars( $value1["idvideo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.pdf" role="button">PDF</a>
+                    <a class="btn btn-primary" href="<?php echo htmlspecialchars( $value1["despdf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" role="button">PDF</a>
                     <a href="/admin/videos/<?php echo htmlspecialchars( $value1["idvideo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                   </div>
                 </div>

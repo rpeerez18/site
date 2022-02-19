@@ -31,7 +31,7 @@
                     <p class="card-text">
                       <iframe width="560" height="315" src="{$value.urlvideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </p>
-                    <a class="btn btn-primary" href="/res/site/pdf/videos/{$value.idvideo}.pdf" role="button">PDF</a>
+                    <a class="btn btn-primary" href="{$value.despdf}" role="button">PDF</a>
                     <a href="/admin/videos/{$value.idvideo}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                   </div>
                 </div>

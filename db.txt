@@ -89,7 +89,7 @@ CREATE PROCEDURE sp_projects_save(
 pidprojects INT,
 ptitle VARCHAR(100),
 pdescription text,
-pparticipants varchar (200)
+
 )
 BEGIN
 	
@@ -99,15 +99,15 @@ BEGIN
         SET 
 			title = ptitle,
 			description= pdescription,
-			participants = pparticipants
+			
             
         WHERE idprojects = pidprojects;
         
 
     ELSE
 		
-		INSERT INTO tb_projects (title, description, participants) 
-        VALUES(ptitle, pdescription, pparticipants);
+		INSERT INTO tb_projects (title, description) 
+        VALUES(ptitle, pdescription);
         
         SET pidprojects = LAST_INSERT_ID();
         

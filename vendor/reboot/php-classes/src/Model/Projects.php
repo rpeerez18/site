@@ -13,7 +13,9 @@ class Projects extends Model {
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_projects ORDER BY idprojects");
+		return $sql->select
+		("SELECT tb_projects.*, GROUP_CONCAT(name SEPARATOR ',') AS namegroup FROM tb_projects LEFT JOIN tb_participants ON tb_projects.idprojects = 
+		tb_participants.idprojects GROUP BY tb_projects.idprojects");
 
 	}
 
@@ -22,11 +24,10 @@ class Projects extends Model {
 
 		$sql = new Sql();
 		
-		$results = $sql->select("CALL sp_projects_save(:idprojects, :title, :description, :participants, :end, :begin)", array(
+		$results = $sql->select("CALL sp_projects_save(:idprojects, :title, :description, :end, :begin)", array(
 			":idprojects"=>$this->getidprojects(),
 			":title"=>$this->gettitle(),
 			":description"=>$this->getdescription(),
-			":participants"=>$this->getparticipants(),
 			":end"=>$this->getend(),
 			":begin"=>$this->getbegin()
 			

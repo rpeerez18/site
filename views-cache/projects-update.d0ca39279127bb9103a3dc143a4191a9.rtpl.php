@@ -29,10 +29,6 @@
               <textarea class="form-control" id="description" name="description" rows="10" cols="190"><?php echo htmlspecialchars( $projects["description"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
             </div>
             <div class="form-group">
-              <label for="participants">Participantes do Projeto</label>
-              <input type="text" class="form-control" id="participants" name="participants" value="<?php echo htmlspecialchars( $projects["participants"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-            </div>
-            <div class="form-group">
               <label for="begin">Data de Inicio</label>
               <input type="date" class="form-control" id="begin" name="begin" value="<?php echo htmlspecialchars( $projects["begin"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>

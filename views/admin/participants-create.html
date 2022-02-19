@@ -30,8 +30,17 @@
               <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome do participante">
               <label for="descategory">Sobrenome do Participante</label>
               <input type="text" class="form-control" id="surname" name="surname" placeholder="Digite o sobrenome do participante">
+              <label for="projects">Escolha Projeto</label>
+              <select name="idprojects" class="form-control" id="projects"> 
+                {loop="$projects"}
+                <option value="{$value.idprojects}" >{$value.title}</option>>
+                {/loop}
+              </select>
+             
+              
             </div>
           </div>
+        
           <!-- /.box-body -->
           <div class="box-footer">
             <button type="submit" class="btn btn-success">Cadastrar</button>

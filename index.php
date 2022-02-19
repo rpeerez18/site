@@ -235,7 +235,7 @@ $app->get("/admin/participants", function(Request $_request, Response $response,
 
 	$page = new PageAdmin();
 
-	$page->setTpl("participants",[
+	$page->setTpl("participants", [
       'participants'=>$participants
    ]);
 
@@ -249,7 +249,11 @@ $app->get("/admin/participants/create", function(Request $_request, Response $re
    
    $page = new PageAdmin();
 
-	$page->setTpl("participants-create");
+   $projects = Projects::listAll();
+
+	$page->setTpl("participants-create",[
+      'projects'=>$projects
+   ]);
 
    return $response;
 
@@ -281,26 +285,6 @@ $app->get('/admin/participants/{idparticipants}/delete', function(Request $_requ
    return $response->withHeader('Location', '/admin/participants')->withStatus(200);
 	exit;
    
-});
-
-$app->get("/admin/participants/{idparticipants}", function(Request $_request, Response $response, $args) {
-
-   User::verifyLogin();
-   
-   $participants = new Participants();
-   
-   $idparticipants = $args['idparticipants'];
-
-   $participants->get((int) $idparticipants);
-
-   $page = new PageAdmin();
-   
-   $page->setTpl("participants-update", array(
-     "participants"=>$participants->getValues()
-   ));
-
-   return $response;
-  
 });
 
 $app->post("/admin/participants/{idparticipants}", function(Request $_request, Response $response, $args) {
@@ -437,7 +421,7 @@ $app->get("/admin/videos", function(Request $_request, Response $response, $args
 	$page = new PageAdmin();
 
 	$page->setTpl("videos",[
-      'videos'=>$videos,
+      'videos'=>Videos::checkList($videos)
       
    ]);
 
